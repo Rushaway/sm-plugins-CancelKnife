@@ -93,7 +93,7 @@ public Plugin myinfo = {
 	name		= "Cancel Knife",
 	author		= "Dolly, .Rushaway",
 	description	= "Allows admins to cancel the knife and revert all things that happened caused by that knife",
-	version		= "1.5",
+	version		= "1.5.1",
 	url			= ""
 };
 
@@ -136,7 +136,7 @@ public void OnAllPluginsLoaded() {
 }
 
 public void OnLibraryAdded(const char[] name) {
-	if (StrEqual(name, "KnifeMode")) {
+	if (strcmp(name, "KnifeMode", false) == 0) {
 		g_bKnifeModeEnabled = true;
 	}
 
@@ -145,7 +145,7 @@ public void OnLibraryAdded(const char[] name) {
 }
 
 public void OnLibraryRemoved(const char[] name) {
-	if (StrEqual(name, "KnifeMode")) {
+	if (strcmp(name, "KnifeMode", false) == 0) {
 		g_bKnifeModeEnabled = false;
 	}
 }
@@ -499,7 +499,7 @@ Action Event_PlayerHurt(Event event, const char[] name, bool dontBroadcast) {
 
 	char weapon[WEAPONS_MAX_LENGTH];
 	event.GetString("weapon", weapon, sizeof(weapon));
-	if (!StrEqual(weapon, "knife")) {
+	if (strcmp(weapon, "knife", false) != 0) {
 		return Plugin_Continue;
 	}
 
